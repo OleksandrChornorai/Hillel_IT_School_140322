@@ -21,4 +21,3 @@ try:
         print("Неверная операция")
 except ValueError:
     print("Не корректное значение")
-    pass
