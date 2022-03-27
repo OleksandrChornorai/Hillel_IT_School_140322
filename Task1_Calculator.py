@@ -26,4 +26,4 @@ try:
 except ZeroDivisionError:
     print("\n>>> На 0 делить нельзя!!! <<<")
 except ValueError:
-    print("\n>>> Не корректное значение <<<")
+    print("\n>>> Некорректное значение! <<<")
