@@ -1,7 +1,7 @@
 input_case = input("Выбери тип операции:\n1 +\n2 -\n3 *\n4 /\n")
+value_1 = float(input("Введи первое число:"))
+value_2 = float(input("Введи второе число:"))
 try:
-    value_1 = float(input("Введи первое число:"))
-    value_2 = float(input("Введи второе число:"))
     if input_case == '1':
         result = (value_1 + value_2)
         print(f"= {result}")
