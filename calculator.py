@@ -23,6 +23,6 @@ try:
     else:
         print("Неверная операция")
 except ZeroDivisionError:
-print("На 0 делить нельзя!!!")
+    print("На 0 делить нельзя!!!")
 except ValueError:
     print("Не корректное значение")
