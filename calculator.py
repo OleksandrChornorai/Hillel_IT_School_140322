@@ -15,6 +15,7 @@ try:
             print("На 0 делить нельзя!!!")
     else:
         print("Неверная операция")
+        print(result)
     print(f"= {result}")
 except ValueError:
     print("Не корректное значение")
