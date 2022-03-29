@@ -22,7 +22,7 @@ else:
     print(f'\n> Результат: {my_str} <')
 #####################################################   5   #####################################################
 print('\n\n_Задача №5_')
-my_str = 'py'
+my_str = 'it'
 if len(my_str) < 5:
     print(f'\n> Результат: {my_str + my_str[::-1]} <')
 else:
@@ -32,7 +32,7 @@ print("\n>>> Calculator by Python ver. 2.0 <<<\n>>> Welcome! <<<\n")
 input_answer = True
 while input_answer:
     input_case = input("Выбери тип операции:\n1 +\n2 -\n3 *\n4 /\n")
-    if input_case in '1234':
+    if input_case in '1' '2' '3' '4':
         try:
             value_1 = float(input("Введи первое число:"))
             value_2 = float(input("Введи второе число:"))
@@ -55,6 +55,6 @@ while input_answer:
             print("\n>>> Некорректное значение! <<<")
     else:
         print("\n>>> Неверная операция! <<<")
-    input_question = input("\nПродолжить работу с калькулятором:\nY or N\n")
-    input_answer = input_question.lower() != 'n'
+    input_question = input("\nПродолжить работу с калькулятором:\nYes(Y) or No(N)\n")
+    input_answer = input_question.lower() == 'y'
 print("\n>>> Операция завершена <<<")
