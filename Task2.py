@@ -1,44 +1,56 @@
 #####################################################   1   #####################################################
-print('\n_Задача №1_ \nЕсли value < 100, то Результат половина значения value, \nв противном случае - противоположное value число')
+print('\n_Задача №1_ ')
 value = 80
-print(f'\nvalue = {value}')
 new_value = value / 2 if value < 100 else -value
-print(f'\n1)>>> Результат: {new_value} <<<')
-
-# print('\n>> Задача с вводом значения <<')
-# value = input('Введи value:')
-# new_value = int(value) / 2 if int(value) < 100 else -int(value)
-# print(f'\n1)>>> Результат: {new_value} <<<')
+print(f'\n> Результат: {new_value} <')
 #####################################################   2   #####################################################
-print('\n\n_Задача №2_ \nЕсли value < 100, то Результат - 1, \nв противном случае - 0')
+print('\n\n_Задача №2_')
 value = 80
-print(f'\nvalue = {value}')
 new_value = 1 if value < 100 else 0
-print(f'\n2)>>> Результат: {new_value} <<<')
-
-# print('\n>> Задача с вводом значения <<')
-# value = input('Введи value:')
-# new_value = 1 if int(value) < 100 else 0
-# print(f'\n2)>>> Результат: {new_value} <<<')
+print(f'\n> Результат: {new_value} <')
 #####################################################   3   #####################################################
-print('\n\n_Задача №3_ \nЕсли value < 100, то Результат - True, \nв противном случае - False')
+print('\n\n_Задача №3_')
 value = 80
-print(f'\nvalue = {value}')
 new_value = True if value < 100 else False
-print(f'\n3)>>> Результат: {new_value} <<<')
-
-# print('\n>> Задача с вводом значения<<')
-# value = input('Введи value:')
-# new_value = True if int(value) < 100 else False
-# print(f'\n3)>>> Результат: {new_value} <<<')
+print(f'\n> Результат: {new_value} <')
 #####################################################   4   #####################################################
-Если ее длинна меньше 5, то допишите в конец строки себя же. Пример: было - "qwer", стало - "qwerqwer". Если длинна не меньше 5, то оставить строку как есть.
-print('\n\n_Задача №4
-my_str = 'qwerty'
+print('\n\n_Задача №4_')
+my_str = 'hillel'
 if len(my_str) < 5:
-    print(my_str * 2)
+    print(f'\n> Результат: {my_str * 2} <')
 else:
-    print(my_str)
-#5) У вас есть переменная my_str, тип - str. Если ее длинна меньше 5, то допишите в конец строки перевернутую себя же. Пример: было - "qwer", стало - "qwerrewq". Если длинна не меньше 5, то оставить строку как есть.
-
-#6) Доработать задание с калькулятором, чтобы в конце вычисления у пользователя спрашивало, нужен ли калькулятор еще. И если да, то запустить вычисление заново
+    print(f'\n> Результат: {my_str} <')
+#####################################################   5   #####################################################
+print('\n\n_Задача №5_')
+my_str = 'py'
+if len(my_str) < 5:
+    print(f'\n> Результат: {my_str + my_str[::-1]} <')
+else:
+    print(f'\n> Результат: {my_str} <')
+#####################################################   6   #####################################################
+print("\n>>> Calculator by Python ver. 2.0 <<<\n>>> Welcome! <<<\n")
+while True:
+    input_case = input("Выбери тип операции:\n1 +\n2 -\n3 *\n4 /\n")
+    if input_case in '1234':
+        try:
+            value_1 = float(input("Введи первое число:"))
+            value_2 = float(input("Введи второе число:"))
+            if input_case == '1':
+                result = (value_1 + value_2)
+                symbol ='+'
+            elif input_case == '2':
+                result = (value_1 - value_2)
+                symbol = '-'
+            elif input_case == '3':
+                result = (value_1 * value_2)
+                symbol = '*'
+            else:
+                result = (value_1 / value_2)
+                symbol = '/'
+            print(f"\nРезультат: {value_1} {symbol} {value_2} = {result} \n\n>>> Операция завершена <<<")
+        except ZeroDivisionError:
+            print("\n>>> На 0 делить нельзя!!! <<<")
+        except ValueError:
+            print("\n>>> Некорректное значение! <<<")
+    else:
+        print("\n>>> Неверная операция! <<<")
