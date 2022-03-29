@@ -38,7 +38,7 @@ while input_answer:
             value_2 = float(input("Введи второе число:"))
             if input_case == '1':
                 result = (value_1 + value_2)
-                symbol ='+'
+                symbol = '+'
             elif input_case == '2':
                 result = (value_1 - value_2)
                 symbol = '-'
@@ -54,7 +54,7 @@ while input_answer:
         except ValueError:
             print("\n>>> Некорректное значение! <<<")
     else:
-            print("\n>>> Неверная операция! <<<")
-    input_question = input("Продолжить работу с калькулятором:\ny\nn\n")
-    input_answer = input_question !='n'
+        print("\n>>> Неверная операция! <<<")
+    input_question = input("\nПродолжить работу с калькулятором:\nY or N\n")
+    input_answer = input_question.lower() != 'n'
 print("\n>>> Операция завершена <<<")
