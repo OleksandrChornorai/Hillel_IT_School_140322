@@ -29,7 +29,8 @@ else:
     print(f'\n> Результат: {my_str} <')
 #####################################################   6   #####################################################
 print("\n>>> Calculator by Python ver. 2.0 <<<\n>>> Welcome! <<<\n")
-while True:
+input_answer = True
+while input_answer:
     input_case = input("Выбери тип операции:\n1 +\n2 -\n3 *\n4 /\n")
     if input_case in '1234':
         try:
@@ -47,10 +48,13 @@ while True:
             else:
                 result = (value_1 / value_2)
                 symbol = '/'
-            print(f"\nРезультат: {value_1} {symbol} {value_2} = {result} \n\n>>> Операция завершена <<<")
+            print(f"\nРезультат: {value_1} {symbol} {value_2} = {result}")
         except ZeroDivisionError:
             print("\n>>> На 0 делить нельзя!!! <<<")
         except ValueError:
             print("\n>>> Некорректное значение! <<<")
     else:
-        print("\n>>> Неверная операция! <<<")
+            print("\n>>> Неверная операция! <<<")
+    input_question = input("Продолжить работу с калькулятором:\ny\nn\n")
+    input_answer = input_question !='n'
+print("\n>>> Операция завершена <<<")
