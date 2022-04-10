@@ -9,13 +9,8 @@ print(result)
 # 2. Дано целое число (int). Определить сколько нулей в конце этого числа. Например для числа 1002000 - три нуля
 print("\n#2.")
 number = 1002000
-if number == 0:
-    print(1)
-    exit()
-result = 0
-while number % 10 == 0:
-    number //= 10
-    result += 1
+str_number = str(number)
+result = (len(str_number) - len(str_number.rstrip('0')))
 print(result)
 #####################################################
 # 3. Даны списки my_list_1 и my_list_2.
@@ -34,17 +29,16 @@ print(my_result)
 print("\n#4.")
 my_list = [1, 2, 3, 4]
 new_list = []
-new_list.extend(my_list[1::1] + my_list[:1:])
+new_list.extend(my_list[1:] + my_list[:1])
 print(new_list)
 #####################################################
 # 5.Дан список my_list. В ЭТОМ списке первый элемент переставить на последнее место.
 # [1,2,3,4] -> [2,3,4,1]. Пересоздавать список нельзя! (используйте метод pop)
 print("\n#5.")
 my_list = [1, 2, 3, 4]
-my_list_0 = my_list[:1:]
 print(id(my_list))
-my_list.pop(0)
-my_list.extend(my_list_0)
+value = my_list.pop(0)
+my_list.append(value)
 print(my_list, id(my_list))
 #####################################################
 # 6. Дана строка в которой есть числа (разделяются пробелами).
@@ -115,7 +109,10 @@ print(new_list)
 # которые встречаются в строке ТОЛЬКО ОДИН раз.
 print("\n#11.")
 my_str = 'Hillel'
-my_list = list(set(my_str))
+my_list =[]
+for symbol in my_str:
+    if my_str.count(symbol) == 1:
+        my_list.append(symbol)
 print(my_list)
 #####################################################
 # 12. Даны две строки. Создать список в который поместить те символы,
