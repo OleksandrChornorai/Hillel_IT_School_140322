@@ -110,7 +110,7 @@ print(new_list)
 print("\n#11.")
 my_str = 'Hillel'
 my_list =[]
-for symbol in my_str:
+for symbol in set(my_str):
     if my_str.count(symbol) == 1:
         my_list.append(symbol)
 print(my_list)
