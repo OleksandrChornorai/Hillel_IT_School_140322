@@ -50,6 +50,8 @@ persons = [{"name": "John", "age": 25},
            ]
 age = []
 name = []
+young_age = []
+long_len_name = []
 for value in persons:
     age.append(value["age"])
     name.append(len(value["name"]))
@@ -57,12 +59,12 @@ min_age = min(age)
 long_name = max(name)
 for value in persons:
     if value['age'] == min_age:
-        print(f'Самый молодой: {value["name"]}')
+        young_age.append(value["name"])
 for value in persons:
     if len(value['name']) == long_name:
-        print(f'Самое длинное имя: {value["name"]}')
+        long_len_name.append(value["name"])
 av_age = sum(age) / len(age)
-print(f'Средний возраст: {av_age}')
+print(f'Самый молодой: {young_age}\nСамое длинное имя: {long_len_name}\nСредний возраст: {av_age}')
 #####################################################
 # 5) Даны два словаря my_dict_1 и my_dict_2.
 # а) Создать список из ключей, которые есть в обоих словарях.
