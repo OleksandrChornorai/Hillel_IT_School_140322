@@ -19,12 +19,12 @@ result1 = func1_list(my_list1)
 # 2. Написать функцию которой передается один параметр - список строк my_list.
 # Функция возвращает новый список в котором содержаться
 # элементы из my_list у которых первый символ - буква "a".
-new_list2 = []
 
 
 def func2_list(my_list1):
+    new_list2 = []
     for symbol2 in my_list1:
-        if 'A' == symbol2[0]:
+        if 'a' == symbol2.lower()[0]:
             new_list2.append(symbol2)
     return new_list2
 
@@ -33,10 +33,10 @@ result2 = func2_list(my_list1)
 # 3. Написать функцию которой передается один параметр - список строк my_list.
 # Функция возвращает новый список в котором содержаться
 # элементы из my_list в которых есть символ - буква "a" на любом месте.
-new_list3 = []
 
 
 def func3_list(my_list1):
+    new_list3 = []
     for symbol3 in my_list1:
         if 'a' in symbol3:
             new_list3.append(symbol3)
@@ -63,10 +63,10 @@ result4 = func4_list(my_list2)
 # Функция возвращает новый список в котором содержаться те символы из my_str,
 # которые встречаются в строке только один раз.
 my_str5 = 'Hillel it school'
-my_list5 = []
 
 
 def func5_list(my_str5):
+    my_list5 = []
     for symbol5 in set(my_str5):
         if my_str5.count(symbol5) == 1:
             my_list5.append(symbol5)
@@ -90,10 +90,10 @@ result6 = func6_list(my_str_1, my_str_2)
 # 7. Написать функцию которой передается два параметра - две строки.
 # Функция возвращает список в который поместить те символы, которые есть в обеих строках,
 # но в каждой только по одному разу.
-my_list7 = []
 
 
 def func7_list(my_str_1, my_str_2):
+    my_list7 = []
     for symbol7 in set(my_str_1).intersection(set(my_str_2)):
         if my_str_1.count(symbol7) == 1 and my_str_2.count(symbol7) == 1:
             my_list7.append(symbol7)
