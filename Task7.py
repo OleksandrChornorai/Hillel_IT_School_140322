@@ -48,10 +48,10 @@ result3 = func3_list(my_list1)
 # котором могут быть как строки (type str) так и целые числа (type int).
 # Функция возвращает новый список в котором содержаться только строки из my_list.
 my_list2 = [1, 2, 3, "11", "22", 33, "qwerty"]
-new_list4 = []
 
 
 def func4_list(my_list2):
+    new_list4 = []
     for symbol4 in my_list2:
         if type(symbol4) == str:
             new_list4.append(symbol4)
