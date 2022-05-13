@@ -3,74 +3,106 @@ import json
 import random
 
 
-class MoneyExchange:
-    def __init__(self, config_file, exchange_list):
-        self.config_file = config_file
-        self.exchanger = exchange_list
-        self.read_config()
-        self.start_exchange()
-        self.exchanger_list()
-        self.course = self.exchanger_list()["course"]
-        self.uah_acc = self.exchanger_list()["uah_acc"]
-        self.usd_acc = self.exchanger_list()["usd_acc"]
-        self.delta = self.exchanger_list()["delta"]
-        self.change_course()
+def read_config(config_file):
+    with open(config_file, 'r') as file:
+        config = json.load(file)
+        return config
 
-    def read_config(self):
-        with open(self.config_file, 'r') as file:
-            config = json.load(file)
-            return config
 
-    def start_exchange(self):
-        with open(self.exchanger, 'w') as file:
-            json.dump(self.read_config(), file, indent=2)
+def read_exchange_list(exchange_list):
+    with open(exchange_list, 'r') as file:
+        exchange = json.load(file)
+        return exchange
 
-    def exchanger_list(self):
-        with open(self.exchanger, 'r') as file:
-            exchange = json.load(file)
-            return exchange
 
-    def change_course(self):
-        new_course = round(random.uniform(self.course - self.delta, self.course + self.delta), 2)
-        with open(self.exchanger, 'r') as file:
-            data = json.load(file)
-            data["course"] = new_course
-        with open(self.exchanger, 'w') as file:
-            json.dump(data, file)
+def change_course(exchange_list):
+    with open(exchange_list, 'r') as file:
+        data = json.load(file)
+        course = data["course"]
+        delta = data["delta"]
+        new_course = round(random.uniform(course - delta, course + delta), 2)
+        data["course"] = new_course
+    with open(exchange_list, 'w') as file:
+        json.dump(data, file, indent=2)
+
+
+def buy_sell(exchange_list, args, operation):
+    with open(exchange_list, 'r') as file:
+        data = json.load(file)
+        new_uah = data["uah_acc"]
+        new_usd = data["usd_acc"]
+        if operation == 'BUY':
+            if data["uah_acc"] >= float(args["value"]) * data["course"]:
+                buyer = float(args["value"]) * data["course"]
+                new_uah = data["uah_acc"] - buyer
+                new_usd = data["usd_acc"] + float(args["value"])
+            else:
+                print(f'UNAVAILABLE, REQUIRED BALANCE UAH {args["value"] * data["course"]}, AVAILABLE {data["uah_acc"]}')
+        elif operation == 'SELL':
+            if data["usd_acc"] >= float(args["value"]):
+                buyer = float(args["value"]) * data["course"]
+                new_uah = data["uah_acc"] + buyer
+                new_usd = data["usd_acc"] - float(args["value"])
+            else:
+                print(f'UNAVAILABLE, REQUIRED BALANCE USD {args["value"]}, AVAILABLE {data["usd_acc"]}')
+        data["uah_acc"] = new_uah
+        data["usd_acc"] = new_usd
+    with open(exchange_list, 'w') as file:
+        json.dump(data, file, indent=2)
+
+
+def buy_sell_all(exchange_list, operation):
+    with open(exchange_list, 'r') as file:
+        data = json.load(file)
+        new_uah = data["uah_acc"]
+        new_usd = data["usd_acc"]
+        if operation == 'BUY':
+            new_usd = data["uah_acc"] / data["course"]
+            new_uah = 0
+        elif operation == 'SELL':
+            new_uah = data["usd_acc"] * data["course"]
+            new_usd = 0
+        data["uah_acc"] = new_uah
+        data["usd_acc"] = new_usd
+    with open(exchange_list, 'w') as file:
+        json.dump(data, file, indent=2)
+
+
+def restart_exchange(config_file, exchange_list):
+    with open(config_file, 'r') as file:
+        config = json.load(file)
+    with open(exchange_list, 'w') as file:
+        json.dump(config, file, indent=2)
 
 
 args = ArgumentParser()
 args.add_argument("operation", type=str, nargs='?', default='')
-args.add_argument("value", type=float, nargs='?', default='0')
+args.add_argument("value", nargs='?', default='0')
 args = vars(args.parse_args())
-# print(f'{args["operation"]},{args["value"]}')
 config_file = '../Hillel_IT_School_140322/course_work/config.json'
-exchange_list = '../Hillel_IT_School_140322/course_work/exchange_list.json'
-make_exchange = MoneyExchange(config_file, exchange_list)
-result = make_exchange.read_config()
-result2 = make_exchange.exchanger_list()
-course = make_exchange.exchanger_list()["course"]
-uah_acc = make_exchange.exchanger_list()["uah_acc"]
-usd_acc = make_exchange.exchanger_list()["usd_acc"]
-try:
-    moneymaker = MoneyExchange(config_file, exchange_list)
-    if args["operation"] == 'RATE':
-        print(f'Курс:{course}')
-    elif args["operation"] == 'AVAILABLE':
-        print(f'UAH:{uah_acc}')
-        print(f'USD:{usd_acc}')
-    elif args["operation"] == 'NEXT':
-        make_exchange.change_course()
-    else:
-        pass
-except ValueError:
-    print('ERROR')
-# print(result, result2)
-# RATE - получение текущего курса (USD/UAH)
-# AVAILABLE - получение остатков по счетам
-# BUY XXX - покупка xxx долларов. При отсутсвии грвен для покупки выводит сообщение типа UNAVAILABLE, REQUIRED BALANCE UAH 2593.00, AVAILABLE 1000.00
-# SELL XXX - продажа xxx долларов. При отсутсвии долларов для продажи выводит сообщение типа UNAVAILABLE, REQUIRED BALANCE USD 200.00, AVAILABLE 135.00
-# BUY ALL - покупка долларов на все возможные гривны.
-# SELL ALL - продажа всех долларов.
-# NEXT - получить следующий курс
-# RESTART - начать игру с начала (с начальными условиями)
+exchange_list = '/Users/AleksandrCh/PycharmProjects/Hillel_IT_School_140322/course_work/exchange_list.json'
+read_list = read_exchange_list(exchange_list)
+real_course = read_exchange_list(exchange_list)["course"]
+uah_acc = read_exchange_list(exchange_list)["uah_acc"]
+usd_acc = read_exchange_list(exchange_list)["usd_acc"]
+if args["operation"] == 'RATE':
+    print(f'Курс: {real_course}')
+elif args["operation"] == 'AVAILABLE':
+    print(f'UAH: {uah_acc}')
+    print(f'USD: {usd_acc}')
+elif args["operation"] == 'BUY':
+    if args["value"] == 'ALL':
+        buy_sell_all(exchange_list, 'BUY')
+    elif float(args["value"]) > 0:
+        buy_sell(exchange_list, args, 'BUY')
+elif args["operation"] == 'SELL':
+    if args["value"] == 'ALL':
+        buy_sell_all(exchange_list, 'SELL')
+    elif float(args["value"]) > 0:
+        buy_sell(exchange_list, args, 'SELL')
+elif args["operation"] == 'NEXT':
+    change_course(exchange_list)
+elif args["operation"] == 'RESTART':
+    restart_exchange(config_file, exchange_list)
+else:
+    pass
